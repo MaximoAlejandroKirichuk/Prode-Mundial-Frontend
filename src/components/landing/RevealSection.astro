@@ -1,0 +1,28 @@
+---
+// RevealSection.astro — wraps any section with scroll-triggered reveal.
+// Uses CSS + IntersectionObserver (no runtime deps).
+// Respects prefers-reduced-motion.
+export interface Props {
+  /** HTML tag to render (default: "section") */
+  as?: string;
+  /** Additional CSS classes for the wrapper */
+  class?: string;
+  /** Delay index for stagger within a group (0-based) */
+  stagger?: number;
+}
+
+const Tag = (Astro.props.as ?? "section") as keyof HTMLElementTagNameMap;
+const baseClass = "reveal-section opacity-0 translate-y-6 transition-[opacity,transform] duration-700 ease-out will-change-[opacity,transform]";
+const staggerMs = (Astro.props.stagger ?? 0) * 80;
+
+const { class: extraClass = "", ...attrs } = Astro.props;
+---
+
+<Tag
+  class={`${baseClass} ${extraClass}`}
+  style={`transition-delay: ${staggerMs}ms;`}
+  data-reveal
+  {...attrs}
+>
+  <slot />
+</Tag>

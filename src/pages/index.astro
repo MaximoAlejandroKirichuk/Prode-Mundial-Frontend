@@ -1,147 +1,219 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { SignupIsland } from '../components/SignupIsland';
-import { Separator } from '../components/ui/separator';
-import { Badge } from '../components/ui/badge';
+import TrustBar from '../components/landing/TrustBar.astro';
+import HowItWorks from '../components/landing/HowItWorks.astro';
+import RevealSection from '../components/landing/RevealSection.astro';
+import SignupSkeleton from '../components/landing/SignupSkeleton.astro';
 ---
 
 <Layout
-  title="Prode Mundial - Predecí los resultados del Mundial"
-  description="Sumate al prode del Mundial 2026. Inscribite, predecí los resultados de los partidos y competí con hinchas de toda Argentina y Latinoamérica."
+  title="Prode Mundial - Predeci los resultados del Mundial 2026"
+  description="Sumate al prode del Mundial 2026. Inscribite, predeci los resultados de los partidos y competi con hinchas de toda Argentina y Latinoamerica."
 >
   <main>
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-gradient-to-b from-primary/5 via-background to-background py-20 md:py-32">
-      <div class="mx-auto max-w-4xl px-6 text-center">
-        <Badge variant="secondary" className="mb-6">Mundial 2026</Badge>
-        <h1 class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          Predecí el <span class="text-primary">Mundial</span>
-        </h1>
-        <p class="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto md:text-xl">
-          Sumate a miles de hinchas de Argentina y Latinoamérica.
-          Hacé tus predicciones, competí con amigos y demostrá que conocés el fútbol.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#signup"
-            class="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-          >
-            Inscribirme Ahora
-          </a>
-          <a
-            href="#how-it-works"
-            class="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-          >
-            Cómo Funciona
-          </a>
+    <!-- Hero: Asymmetric, left-aligned, poster energy -->
+    <section class="relative min-h-[90dvh] flex items-center overflow-hidden">
+      <!-- Decorative diagonal background -->
+      <div class="absolute inset-0 diagonal-cancha pointer-events-none" aria-hidden="true"></div>
+      <!-- Subtle stripe pattern overlay -->
+      <div class="absolute inset-0 stripe-celeste pointer-events-none opacity-40" aria-hidden="true"></div>
+
+      <div class="relative mx-auto w-full max-w-7xl px-6 pt-16 pb-12 md:pt-20 md:pb-20">
+        <div class="grid items-center gap-8 md:grid-cols-7 lg:grid-cols-12">
+          <!-- Text block: left side, spans majority -->
+          <div class="md:col-span-4 lg:col-span-7">
+            <p class="hero-stagger-start animate-hero-reveal text-sm font-bold uppercase tracking-[0.15em] text-primary" style="animation-delay: 0ms;">
+              Prode Mundial 2026
+            </p>
+
+            <h1 class="hero-stagger-start animate-hero-reveal mt-4 text-4xl font-extrabold leading-[1.05] tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl" style="animation-delay: 120ms;">
+              El Mundial<br />
+              <span class="text-primary">se juega aca</span>
+            </h1>
+
+            <p class="hero-stagger-start animate-hero-reveal-subtle mt-6 max-w-[50ch] text-base text-muted-foreground sm:text-lg md:mt-8" style="animation-delay: 280ms;">
+              Arma tu prode, competi con tus amigos y con hinchas de todo el pais.
+              Cada partido suma, cada prediccion te acerca a la gloria.
+            </p>
+
+            <div class="hero-stagger-start animate-hero-reveal-subtle mt-8 flex flex-wrap gap-3 md:mt-10" style="animation-delay: 420ms;">
+              <a
+                href="#signup"
+                class="inline-flex h-12 items-center justify-center rounded-sm bg-primary px-8 text-sm font-bold tracking-wide text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:-translate-y-[1px] hover:shadow-md active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              >
+                Quiero Jugar
+              </a>
+              <a
+                href="#how-it-works"
+                class="inline-flex h-12 items-center justify-center gap-2 rounded-sm border border-border bg-background px-6 text-sm font-semibold text-foreground transition-all hover:bg-cancha-stripe active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              >
+                Como funciona
+              </a>
+            </div>
+          </div>
+
+          <!-- Visual anchor: right side, large cropped soccer ball -->
+          <div class="hidden md:col-span-3 md:block lg:col-span-5" aria-hidden="true">
+            <div class="relative flex items-center justify-center">
+              <!-- Radial glow behind the ball for depth -->
+              <div class="absolute inset-0 rounded-full bg-primary/5 blur-3xl scale-125" aria-hidden="true"></div>
+              <!-- Soccer ball: oversized, slightly rotated, cropped by container -->
+              <div class="relative w-full max-w-[420px] overflow-visible">
+                <img
+                  src="/assets/soccer-ball.svg"
+                  alt=""
+                  class="w-full h-auto animate-ball-float drop-shadow-[0_24px_48px_rgba(11,45,74,0.18)]"
+                  style="transform: rotate(-8deg);"
+                  loading="eager"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="py-20 bg-muted/30">
+    <!-- Trust Bar: bold authentic stats with net texture -->
+    <RevealSection as="div" class="net-texture" stagger="0">
+      <TrustBar />
+    </RevealSection>
+
+    <!-- How It Works: asymmetric bento -->
+    <RevealSection class="field-lines" stagger="1">
+      <HowItWorks />
+    </RevealSection>
+
+    <!-- Signup Section: integrated, no card shell -->
+    <RevealSection id="signup" class="pitch-texture tribuna-noise py-20 lg:py-28" stagger="2">
       <div class="mx-auto max-w-4xl px-6">
-        <h2 class="text-3xl font-bold text-center tracking-tight">Cómo Funciona</h2>
-        <p class="mt-4 text-center text-muted-foreground max-w-xl mx-auto">
-          Empezar es muy fácil. Tres pasos para sumarte.
-        </p>
-        <div class="mt-12 grid gap-8 md:grid-cols-3">
-          <div class="flex flex-col items-center text-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-lg">
-              1
-            </div>
-            <h3 class="font-semibold text-lg">Inscribite</h3>
-            <p class="text-muted-foreground">
-              Completá tu nombre y correo. Solo necesitamos los datos básicos para arrancar.
-            </p>
-          </div>
-          <div class="flex flex-col items-center text-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-lg">
-              2
-            </div>
-            <h3 class="font-semibold text-lg">Pagá la Inscripción</h3>
-            <p class="text-muted-foreground">
-              abilá tu cuota de forma segura por Mercado Pago. Son solo un par de minutos.
-            </p>
-          </div>
-          <div class="flex flex-col items-center text-center gap-4">
-            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-lg">
-              3
-            </div>
-            <h3 class="font-semibold text-lg">Jugá y Ganá</h3>
-            <p class="text-muted-foreground">
-              Predecí los resultados de cada partido. Los que acierten más, ganan premios.
-            </p>
+        <div class="mb-12 max-w-lg">
+          <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl headline-accent inline-block">
+            Estas a un paso
+          </h2>
+          <p class="mt-4 text-muted-foreground max-w-[55ch]">
+            Completa tus datos, hace el pago por Mercado Pago y empeza a predecir.
+            Simple, seguro, y con toda la emocion del futbol.
+          </p>
+        </div>
+
+        <div class="signup-form-area border border-border/60 bg-background px-6 py-10 sm:px-10 relative min-h-[340px]">
+          <!-- Skeleton visible until React hydrates the <form>. Hidden via CSS :has() -->
+          <SignupSkeleton />
+
+          <!-- React island wrapper: fade-in after hydration -->
+          <div class="signup-island-wrapper relative z-10 bg-background">
+            <SignupIsland client:load />
           </div>
         </div>
       </div>
-    </section>
+    </RevealSection>
 
-    <Separator />
-
-    <!-- Signup Section -->
-    <section id="signup" class="py-20">
-      <div class="mx-auto max-w-4xl px-6">
-        <h2 class="text-3xl font-bold text-center tracking-tight">¿Listo para Jugar?</h2>
-        <p class="mt-4 text-center text-muted-foreground max-w-xl mx-auto">
-          Completá el formulario y empezá tu experiencia en el Prode del Mundial.
-        </p>
-        <div class="mt-12">
-          <SignupIsland client:load />
-        </div>
-      </div>
-    </section>
-
-    <Separator />
-
-    <!-- FAQ / Trust Section -->
-    <section class="py-20 bg-muted/30">
+    <!-- FAQ Section -->
+    <RevealSection class="border-t border-border py-20 lg:py-28" stagger="3">
       <div class="mx-auto max-w-3xl px-6">
-        <h2 class="text-3xl font-bold text-center tracking-tight">Preguntas Frecuentes</h2>
-        <div class="mt-12 space-y-8">
-          <div>
-            <h3 class="font-semibold text-lg">¿Cómo pago la inscripción?</h3>
-            <p class="mt-2 text-muted-foreground">
-              Después de inscribirte, te redirigimos a Mercado Pago para que completes
-              el pago de forma segura. Podés pagar con tarjeta de crédito, débito, o
-              en efectivo en un Rapipago o Pago Fácil.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">¿Cuándo recibo mi link de acceso?</h3>
-            <p class="mt-2 text-muted-foreground">
-              Una vez que tu pago sea confirmado, vas a recibir un correo con tu link
-              de acceso. Esto suele tardar unos minutos. Si pagaste en un local
-              físico, puede tardar hasta 24 horas en verificarse el pago.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">No recibí el correo. ¿Qué hago?</h3>
-            <p class="mt-2 text-muted-foreground">
-              Primero revisá tu carpeta de spam o correo no deseado. Si no está
-              después de 10 minutos, escribinos a
-              <strong>soporte@prodemundial.com</strong> adjuntando tu comprobante
-              de Mercado Pago y te ayudamos a acceder.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">¿Mi información de pago es segura?</h3>
-            <p class="mt-2 text-muted-foreground">
-              Sí. Todos los pagos se procesan a través de Mercado Pago, una plataforma
-              de confianza y segura. Nosotros nunca vemos ni almacenamos los datos
-              de tu tarjeta.
-            </p>
-          </div>
+        <div class="mb-12 max-w-lg">
+          <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl headline-accent inline-block">
+            Preguntas frecuentes
+          </h2>
+        </div>
+
+        <div class="divide-y divide-border">
+          <details class="group py-5" open>
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-foreground list-none">
+              Como me inscribo?
+              <span class="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="1" x2="8" y2="15" />
+                  <line x1="1" y1="8" x2="15" y2="8" />
+                </svg>
+              </span>
+            </summary>
+            <div class="mt-3 pb-2 text-sm text-muted-foreground leading-relaxed max-w-[65ch]">
+              Completa el formulario con tu nombre y correo. Te redirigimos a Mercado Pago
+              para que pagues la inscripcion de forma segura. Una vez confirmado el pago,
+              recibis tu link de acceso por correo.
+            </div>
+          </details>
+
+          <details class="group py-5">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-foreground list-none">
+              Como funciona el prode?
+              <span class="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="1" x2="8" y2="15" />
+                  <line x1="1" y1="8" x2="15" y2="8" />
+                </svg>
+              </span>
+            </summary>
+            <div class="mt-3 pb-2 text-sm text-muted-foreground leading-relaxed max-w-[65ch]">
+              Antes de cada partido del Mundial, entras a la plataforma y cargas tu
+              prediccion. Sumas puntos por cada resultado exacto o tendencia acertada.
+              Los mejores del ranking compiten por premios.
+            </div>
+          </details>
+
+          <details class="group py-5">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-foreground list-none">
+              Cuando recibo mi link de acceso?
+              <span class="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="1" x2="8" y2="15" />
+                  <line x1="1" y1="8" x2="15" y2="8" />
+                </svg>
+              </span>
+            </summary>
+            <div class="mt-3 pb-2 text-sm text-muted-foreground leading-relaxed max-w-[65ch]">
+              Una vez confirmado el pago, te llega un correo con tu acceso. Si pagaste
+              con tarjeta suele ser inmediato. Si pagaste en efectivo, puede demorar
+              hasta 24 horas.
+            </div>
+          </details>
+
+          <details class="group py-5">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-foreground list-none">
+              Es seguro pagar por Mercado Pago?
+              <span class="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="1" x2="8" y2="15" />
+                  <line x1="1" y1="8" x2="15" y2="8" />
+                </svg>
+              </span>
+            </summary>
+            <div class="mt-3 pb-2 text-sm text-muted-foreground leading-relaxed max-w-[65ch]">
+              Totalmente. Mercado Pago procesa todas las transacciones con los mas altos
+              estandares de seguridad. Nosotros no almacenamos datos de tu tarjeta ni
+              de tu medio de pago.
+            </div>
+          </details>
+
+          <details class="group py-5">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-foreground list-none">
+              No recibi el correo, que hago?
+              <span class="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="1" x2="8" y2="15" />
+                  <line x1="1" y1="8" x2="15" y2="8" />
+                </svg>
+              </span>
+            </summary>
+            <div class="mt-3 pb-2 text-sm text-muted-foreground leading-relaxed max-w-[65ch]">
+              Revisa la carpeta de spam o correo no deseado. Si despues de 10 minutos
+              no aparece, escribinos a
+              <strong>soporte@prodemundial.com</strong> con tu comprobante
+              de Mercado Pago y te ayudamos.
+            </div>
+          </details>
         </div>
       </div>
-    </section>
+    </RevealSection>
 
     <!-- Footer -->
-    <footer class="border-t py-8">
-      <div class="mx-auto max-w-4xl px-6 text-center text-sm text-muted-foreground">
+    <footer class="border-t border-border bg-cancha-dark py-10">
+      <div class="mx-auto max-w-4xl px-6 text-center text-sm text-white/60">
         <p>Prode Mundial &copy; {new Date().getFullYear()}. Todos los derechos reservados.</p>
         <p class="mt-2">
-          ¿Dudas? Escribinos a <a href="mailto:soporte@prodemundial.com" class="underline hover:text-foreground">soporte@prodemundial.com</a>
+          Dudas? Escribinos a <a href="mailto:soporte@prodemundial.com" class="underline hover:text-white">soporte@prodemundial.com</a>
         </p>
       </div>
     </footer>

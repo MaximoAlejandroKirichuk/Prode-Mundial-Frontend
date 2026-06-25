@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333.333 333.333" width="333.333" height="333.333">
+  <defs>
+    <linearGradient id="fieldGrad" x1="547.78" y1="291.9" x2="450.56" y2="-39.73" gradientTransform="translate(-363.45,-48.08)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#18b100"/>
+      <stop offset="1" stop-color="#3cff1d"/>
+    </linearGradient>
+    <linearGradient id="fieldHighlight" x1="150.09" y1="58.79" x2="219.55" y2="259.92" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".43"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M304.17 301.8c0 5.08-60.38 9.2-134.86 9.2S34.46 306.88 34.46 301.8s60.38-9.2 134.86-9.2 134.86 4.12 134.86 9.2z" fill="#000" fill-opacity=".18"/>
+  <path d="M124.55 3.42l182 35-128 265-174-86z" fill="url(#fieldGrad)" stroke="#000" stroke-width="1"/>
+  <path d="M128.55 9.42l170 34-124 248-164-77z" fill="none" stroke="#fff" stroke-width="4.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M71.55 107.42l166 53" fill="none" stroke="#fff" stroke-width="4.1" stroke-linecap="round"/>
+  <path d="M164.55 104.42c-15.41-4.81-41.05 3-49 17-7.95 14-2.33 36.14 15 42s43.54-4.77 51-20c7.46-15.23-1.59-34.19-17-39z" fill="none" stroke="#fff" stroke-width="4.1" stroke-linecap="round"/>
+  <path d="M151.55 17.42l-21 37 106 27 23-45" fill="none" stroke="#fff" stroke-width="4.1" stroke-linecap="round"/>
+  <path d="M168.55 19.42l-14 31 66 15 19-33" fill="none" stroke="#fff" stroke-width="4.1" stroke-linecap="round"/>
+  <path d="M167.55 63.92c-2.75 5.75 1.24 16.5 8.75 18s17 0 21.25-10.5" fill="none" stroke="#fff" stroke-width="4.1" stroke-linecap="round"/>
+  <path d="M36.55 223.42l25-43 103 44-24 50" fill="none" stroke="#fff" stroke-width="4.1" stroke-linecap="round"/>
+  <path d="M118.55 262.42l16-34-63-28-18 30" fill="none" stroke="#fff" stroke-width="4.1" stroke-linecap="round"/>
+  <path d="M97.55 193.42c3.75-7.75 14.32-8.76 21.5-6.25s13.75 15 8.5 21.25" fill="none" stroke="#fff" stroke-width="4.1" stroke-linecap="round"/>
+  <path d="M306.55 38.42l-128 265-174-86c140.34 49.06 138.94-189.28 302-179z" fill="url(#fieldHighlight)"/>
+</svg>

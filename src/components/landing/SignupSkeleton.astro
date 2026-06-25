@@ -1,0 +1,31 @@
+---
+// SignupSkeleton.astro — static placeholder visible until React hydrates the signup island.
+// Matches the SignupForm layout: gold accent + 3 inputs + button.
+// Hidden via CSS when the React <form> renders into the container.
+---
+<div class="signup-skeleton w-full max-w-md mx-auto motion-safe:animate-skeleton-fade-in" aria-hidden="true">
+  <!-- Gold accent top line -->
+  <div class="mx-auto mb-6 h-1 w-16 gold-accent-line opacity-40" aria-hidden="true"></div>
+
+  <!-- 3 skeleton input fields -->
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
+      <div class="h-4 w-16 rounded-xs bg-muted animate-skeleton-pulse" aria-hidden="true"></div>
+      <div class="h-10 w-full rounded-xs bg-muted/70 animate-skeleton-pulse [animation-delay:150ms]" aria-hidden="true"></div>
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="h-4 w-28 rounded-xs bg-muted animate-skeleton-pulse [animation-delay:300ms]" aria-hidden="true"></div>
+      <div class="h-10 w-full rounded-xs bg-muted/70 animate-skeleton-pulse [animation-delay:350ms]" aria-hidden="true"></div>
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="h-4 w-24 rounded-xs bg-muted animate-skeleton-pulse [animation-delay:450ms]" aria-hidden="true"></div>
+      <div class="h-10 w-full rounded-xs bg-muted/70 animate-skeleton-pulse [animation-delay:500ms]" aria-hidden="true"></div>
+    </div>
+
+    <!-- Skeleton button -->
+    <div class="mt-3 h-12 w-full rounded-xs bg-primary/20 animate-skeleton-pulse [animation-delay:600ms]" aria-hidden="true"></div>
+
+    <!-- Skeleton footer line -->
+    <div class="mt-1 mx-auto h-3 w-48 rounded-xs bg-muted/50 animate-skeleton-pulse [animation-delay:700ms]" aria-hidden="true"></div>
+  </div>
+</div>

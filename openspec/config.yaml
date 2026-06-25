@@ -1,0 +1,62 @@
+schema: spec-driven
+
+context: |
+  Tech stack: Astro 7 + React 19 + TypeScript 6 + Tailwind 4 + shadcn/ui (new-york) + Redux Toolkit 2.8
+  Package manager: pnpm@9.3.0 (pinned), Node >=22.12.0
+  Architecture: Astro shell with React islands (client:load); Redux Toolkit for state; Tailwind 4 via Vite plugin
+  Routes/SEO in .astro files; React hydrated only where interactivity is needed
+  Public copy: Spanish for Argentina; code/identifiers/comments/artifacts: English
+  Product: SEO-oriented football prode (prediction game) for Argentina/Latin America audience
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include sequence diagrams for complex flows
+    - Document architecture decisions with rationale
+  tasks:
+    - Group by phase, use hierarchical numbering
+    - Keep tasks completable in one session
+  apply:
+    - Follow existing code patterns
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: "pnpm build"
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas
+
+testing:
+  strict_tdd: false
+  runner:
+    command: ""
+    framework: none
+    reason: "No test runner installed. Add vitest or jest to enable TDD."
+  layers:
+    unit:
+      available: false
+      tool: ""
+    integration:
+      available: false
+      tool: ""
+    e2e:
+      available: false
+      tool: ""
+  coverage:
+    available: false
+    command: ""
+  quality:
+    linter:
+      available: false
+      command: ""
+    type_checker:
+      available: false
+      command: "astro check"
+    formatter:
+      available: false
+      command: ""

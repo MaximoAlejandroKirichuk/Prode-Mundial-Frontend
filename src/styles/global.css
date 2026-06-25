@@ -1,0 +1,368 @@
+@import "tailwindcss";
+
+@theme {
+  /* Argentina World Cup palette - tribuna / cancha energy */
+  --color-background: #ffffff;
+  --color-foreground: #0a0f1a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0a0f1a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0a0f1a;
+  --color-primary: #0b7bc4;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #e7f3fb;
+  --color-secondary-foreground: #0b3d5e;
+  --color-muted: #f0f6fa;
+  --color-muted-foreground: #445566;
+  --color-accent: #fbbf24;
+  --color-accent-foreground: #3d2e00;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #c8d9e8;
+  --color-input: #c8d9e8;
+  --color-ring: #eab308;
+  --color-chart-1: #0b7bc4;
+  --color-chart-2: #0ea5e9;
+  --color-chart-3: #38bdf8;
+  --color-chart-4: #fbbf24;
+  --color-chart-5: #f59e0b;
+  --color-sidebar: #f8fafc;
+  --color-sidebar-foreground: #0a0f1a;
+  --color-sidebar-primary: #0b7bc4;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-accent: #e7f3fb;
+  --color-sidebar-accent-foreground: #0b3d5e;
+  --color-sidebar-border: #c8d9e8;
+  --color-sidebar-ring: #eab308;
+
+  /* Custom tribuna tokens */
+  --color-cancha-dark: #0b2d4a;
+  --color-cancha-gold: #eab308;
+  --color-cancha-stripe: #e7f3fb;
+
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+/*
+ * ─── PROGRESSIVE REVEAL ANIMATIONS ───────────────────────────
+ * All gated on prefers-reduced-motion: no-preference.
+ * Final state is static for reduced-motion users.
+ */
+
+/* Hero stagger entrance — each child with `hero-reveal` fades in + slides up */
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-reveal-subtle {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-reveal {
+  animation: hero-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-hero-reveal-subtle {
+  animation: hero-reveal-subtle 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Initial opacity 0 for staggered hero children — prevent flash before animation */
+.hero-stagger-start {
+  opacity: 0;
+}
+
+/*
+ * Scroll-triggered section reveal via IntersectionObserver.
+ * The observer adds `.revealed` which triggers the transition.
+ * Classes applied by RevealSection.astro component.
+ */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-section.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*
+ * ─── SKELETON PULSE ──────────────────────────────────────────
+ * Used by SignupSkeleton.astro for the pre-hydration placeholder.
+ */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.animate-skeleton-pulse {
+  animation: skeleton-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes skeleton-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-skeleton-fade-in {
+  animation: skeleton-fade-in 0.3s ease-out both;
+}
+
+/*
+ * ─── SIGNUP SKELETON / FORM PROGRESSIVE REVEAL ───────────────
+ *
+ * Strategy:
+ * - SAFE DEFAULT (all browsers): skeleton hidden, form visible.
+ *   Prevents permanently-hidden form in browsers without :has().
+ *
+ * - PROGRESSIVE (browsers with :has() support): skeleton shown
+ *   until React renders the <form>, then cross-faded to the real form.
+ *   Gated via @supports selector(:has(form)).
+ */
+
+/* ── Safe defaults ──────────────────────────────────────────── */
+.signup-form-area {
+  position: relative;
+}
+
+.signup-skeleton {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+}
+
+.signup-island-wrapper {
+  opacity: 1;
+  transition: opacity 0.4s ease-out;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Progressive skeleton + cross-fade (only when :has() works) */
+@supports selector(:has(form)) {
+  .signup-skeleton {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .signup-island-wrapper {
+    opacity: 0;
+  }
+
+  /* When React renders the <form>, cross-fade skeleton → form */
+  .signup-form-area:has(form) .signup-skeleton {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .signup-form-area:has(form) .signup-island-wrapper {
+    opacity: 1;
+  }
+}
+
+/* ─── BALL FLOAT (existing, preserved) ──────────────────────── */
+@keyframes ball-float {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-6px) rotate(-7deg); }
+}
+
+.animate-ball-float {
+  animation: ball-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+/*
+ * ─── REDUCED MOTION GATE ─────────────────────────────────────
+ * All animations collapse to static final state.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ball-float {
+    animation: none;
+  }
+
+  .animate-hero-reveal,
+  .animate-hero-reveal-subtle {
+    animation: none;
+    opacity: 1;
+  }
+
+  .hero-stagger-start {
+    opacity: 1;
+  }
+
+  .reveal-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-skeleton-pulse {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  .animate-skeleton-fade-in {
+    animation: none;
+  }
+
+  .signup-skeleton,
+  .signup-island-wrapper {
+    transition: none;
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@layer utilities {
+  /* Argentina celeste stripe background - subtle cancha feel */
+  .stripe-celeste {
+    background-image: repeating-linear-gradient(
+      -12deg,
+      transparent,
+      transparent 18px,
+      rgb(11 123 196 / 0.06) 18px,
+      rgb(11 123 196 / 0.06) 20px
+    );
+  }
+
+  /* Diagonal split: right side celeste fading out */
+  .diagonal-cancha {
+    background: linear-gradient(
+      108deg,
+      transparent 48%,
+      rgb(231 243 251 / 0.7) 48%,
+      rgb(11 123 196 / 0.12) 75%,
+      transparent 85%
+    );
+  }
+
+  /* Gold horizontal accent line */
+  .gold-accent-line {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--color-cancha-gold) 15%,
+      var(--color-cancha-gold) 85%,
+      transparent 100%
+    );
+  }
+
+  /* Bold top banner for cancha section headers */
+  .top-stripe-gold {
+    border-top: 3px solid var(--color-cancha-gold);
+  }
+
+  /* Subtle pitch texture for backgrounds */
+  .pitch-texture {
+    background-image:
+      radial-gradient(circle at 20% 50%, rgb(11 123 196 / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgb(234 179 8 / 0.04) 0%, transparent 40%);
+  }
+
+  /*
+   * Goal-net crosshatch texture - subtle repeating diamond grid
+   * evokes stadium netting without overwhelming the layout
+   */
+  .net-texture {
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 14px,
+        rgb(11 123 196 / 0.04) 14px,
+        rgb(11 123 196 / 0.04) 15px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 14px,
+        rgb(11 123 196 / 0.04) 14px,
+        rgb(11 123 196 / 0.04) 15px
+      );
+  }
+
+  /*
+   * Cancha field-lines pattern - subtle horizontal bands + dashed center line
+   * evokes the pitch markings without looking like clip art
+   */
+  .field-lines {
+    background-image:
+      /* subtle green toning stripes - wide spaced */
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 80px,
+        rgb(11 123 196 / 0.03) 80px,
+        rgb(11 123 196 / 0.03) 82px
+      ),
+      /* thin dashed center line */
+      repeating-linear-gradient(
+        90deg,
+        rgb(15 100 60 / 0.04) 0px,
+        rgb(15 100 60 / 0.04) 12px,
+        transparent 12px,
+        transparent 24px
+      );
+    background-size: 100% 100%, 100% 100%;
+    background-position: center 0, center 50%;
+  }
+
+  /*
+   * Stadium crowd / tribuna noise overlay
+   * Subtle grain-like pattern suggesting packed stands
+   */
+  .tribuna-noise {
+    background-image:
+      radial-gradient(circle at 15% 30%, rgb(11 45 74 / 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 75% 60%, rgb(11 45 74 / 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgb(11 45 74 / 0.05) 0%, transparent 40%);
+  }
+
+  /* Accent underline for section headlines */
+  .headline-accent {
+    position: relative;
+  }
+  .headline-accent::after {
+    content: "";
+    position: absolute;
+    bottom: -0.25em;
+    left: 0;
+    width: 2em;
+    height: 3px;
+    background: var(--color-cancha-gold);
+    border-radius: 2px;
+  }
+}
