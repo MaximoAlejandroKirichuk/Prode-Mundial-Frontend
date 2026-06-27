@@ -89,8 +89,8 @@ export function SignupForm() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      {/* Gold accent top line */}
-      <div className="mx-auto mb-6 h-1 w-16 gold-accent-line" aria-hidden="true"></div>
+      {/* Celeste accent top line */}
+      <div className="mx-auto mb-6 h-1 w-16 accent-line" aria-hidden="true"></div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
         <div className="flex flex-col gap-2">
