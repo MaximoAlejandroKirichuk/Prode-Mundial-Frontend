@@ -14,18 +14,18 @@
   --color-secondary-foreground: #0b3d5e;
   --color-muted: #f0f6fa;
   --color-muted-foreground: #445566;
-  --color-accent: #fbbf24;
-  --color-accent-foreground: #3d2e00;
+  --color-accent: #38bdf8;
+  --color-accent-foreground: #0c1e2e;
   --color-destructive: #dc2626;
   --color-destructive-foreground: #ffffff;
   --color-border: #c8d9e8;
   --color-input: #c8d9e8;
-  --color-ring: #eab308;
+  --color-ring: #0b7bc4;
   --color-chart-1: #0b7bc4;
   --color-chart-2: #0ea5e9;
   --color-chart-3: #38bdf8;
-  --color-chart-4: #fbbf24;
-  --color-chart-5: #f59e0b;
+  --color-chart-4: #38bdf8;
+  --color-chart-5: #0ea5e9;
   --color-sidebar: #f8fafc;
   --color-sidebar-foreground: #0a0f1a;
   --color-sidebar-primary: #0b7bc4;
@@ -33,11 +33,11 @@
   --color-sidebar-accent: #e7f3fb;
   --color-sidebar-accent-foreground: #0b3d5e;
   --color-sidebar-border: #c8d9e8;
-  --color-sidebar-ring: #eab308;
+  --color-sidebar-ring: #0b7bc4;
 
   /* Custom tribuna tokens */
-  --color-cancha-dark: #0b2d4a;
-  --color-cancha-gold: #eab308;
+  --color-cancha-dark: #1e293b;
+  --color-cancha-celeste: #38bdf8;
   --color-cancha-stripe: #e7f3fb;
 
   --radius-sm: 0.125rem;
@@ -196,9 +196,26 @@
 
 /*
  * ─── REDUCED MOTION GATE ─────────────────────────────────────
- * All animations collapse to static final state.
+ * Collapses all motion to static final state.
+ * The blanket reset (0.01ms) ensures every animation and transition
+ * fires its end event instantly; class-level overrides guarantee
+ * correct visual final state for reveal/skeleton/pulse utilities.
  */
 @media (prefers-reduced-motion: reduce) {
+  /*
+   * Standard reduced-motion reset — short-circuits all animations
+   * and transitions while preserving their end events.
+   */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* ── Class-level final-state guarantees ────────────────── */
   .animate-ball-float {
     animation: none;
   }
@@ -216,7 +233,6 @@
   .reveal-section {
     opacity: 1;
     transform: none;
-    transition: none;
   }
 
   .animate-skeleton-pulse {
@@ -269,27 +285,27 @@
     );
   }
 
-  /* Gold horizontal accent line */
-  .gold-accent-line {
+  /* Celeste horizontal accent line */
+  .accent-line {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      var(--color-cancha-gold) 15%,
-      var(--color-cancha-gold) 85%,
+      var(--color-cancha-celeste) 15%,
+      var(--color-cancha-celeste) 85%,
       transparent 100%
     );
   }
 
   /* Bold top banner for cancha section headers */
-  .top-stripe-gold {
-    border-top: 3px solid var(--color-cancha-gold);
+  .top-stripe-celeste {
+    border-top: 3px solid var(--color-cancha-celeste);
   }
 
   /* Subtle pitch texture for backgrounds */
   .pitch-texture {
     background-image:
       radial-gradient(circle at 20% 50%, rgb(11 123 196 / 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgb(234 179 8 / 0.04) 0%, transparent 40%);
+      radial-gradient(circle at 80% 20%, rgb(56 189 248 / 0.04) 0%, transparent 40%);
   }
 
   /*
@@ -346,9 +362,9 @@
    */
   .tribuna-noise {
     background-image:
-      radial-gradient(circle at 15% 30%, rgb(11 45 74 / 0.06) 0%, transparent 50%),
-      radial-gradient(circle at 75% 60%, rgb(11 45 74 / 0.04) 0%, transparent 50%),
-      radial-gradient(circle at 50% 80%, rgb(11 45 74 / 0.05) 0%, transparent 40%);
+      radial-gradient(circle at 15% 30%, rgb(30 41 59 / 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 75% 60%, rgb(30 41 59 / 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgb(30 41 59 / 0.05) 0%, transparent 40%);
   }
 
   /* Accent underline for section headlines */
@@ -362,7 +378,7 @@
     left: 0;
     width: 2em;
     height: 3px;
-    background: var(--color-cancha-gold);
+    background: var(--color-cancha-celeste);
     border-radius: 2px;
   }
 }

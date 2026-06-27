@@ -4,6 +4,7 @@ import { SignupIsland } from '../components/SignupIsland';
 import TrustBar from '../components/landing/TrustBar.astro';
 import HowItWorks from '../components/landing/HowItWorks.astro';
 import RevealSection from '../components/landing/RevealSection.astro';
+import PrizesSection from '../components/landing/PrizesSection.astro';
 import SignupSkeleton from '../components/landing/SignupSkeleton.astro';
 ---
 
@@ -40,13 +41,13 @@ import SignupSkeleton from '../components/landing/SignupSkeleton.astro';
             <div class="hero-stagger-start animate-hero-reveal-subtle mt-8 flex flex-wrap gap-3 md:mt-10" style="animation-delay: 420ms;">
               <a
                 href="#signup"
-                class="inline-flex h-12 items-center justify-center rounded-sm bg-primary px-8 text-sm font-bold tracking-wide text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:-translate-y-[1px] hover:shadow-md active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                class="inline-flex h-12 items-center justify-center rounded-sm bg-primary px-8 text-sm font-bold tracking-wide text-primary-foreground shadow-sm transition-[transform,box-shadow,background-color] duration-200 ease-out hover:bg-primary/90 hover:-translate-y-[1px] hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 Quiero Jugar
               </a>
               <a
                 href="#how-it-works"
-                class="inline-flex h-12 items-center justify-center gap-2 rounded-sm border border-border bg-background px-6 text-sm font-semibold text-foreground transition-all hover:bg-cancha-stripe active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                class="inline-flex h-12 items-center justify-center gap-2 rounded-sm border border-border bg-background px-6 text-sm font-semibold text-foreground transition-[transform,box-shadow,background-color] duration-200 ease-out hover:bg-cancha-stripe hover:-translate-y-[1px] hover:shadow-sm active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 Como funciona
               </a>
@@ -59,11 +60,11 @@ import SignupSkeleton from '../components/landing/SignupSkeleton.astro';
               <!-- Radial glow behind the ball for depth -->
               <div class="absolute inset-0 rounded-full bg-primary/5 blur-3xl scale-125" aria-hidden="true"></div>
               <!-- Soccer ball: oversized, slightly rotated, cropped by container -->
-              <div class="relative w-full max-w-[420px] overflow-visible">
+              <div class="relative w-full max-w-105 overflow-visible">
                 <img
                   src="/assets/soccer-ball.svg"
                   alt=""
-                  class="w-full h-auto animate-ball-float drop-shadow-[0_24px_48px_rgba(11,45,74,0.18)]"
+                  class="w-full h-auto animate-ball-float drop-shadow-[0_24px_48px_rgba(30,41,59,0.18)]"
                   style="transform: rotate(-8deg);"
                   loading="eager"
                 />
@@ -84,8 +85,13 @@ import SignupSkeleton from '../components/landing/SignupSkeleton.astro';
       <HowItWorks />
     </RevealSection>
 
+    <!-- Prizes: premium editorial hierarchy -->
+    <RevealSection class="tribuna-noise py-0" stagger="2">
+      <PrizesSection />
+    </RevealSection>
+
     <!-- Signup Section: integrated, no card shell -->
-    <RevealSection id="signup" class="pitch-texture tribuna-noise py-20 lg:py-28" stagger="2">
+    <RevealSection id="signup" class="pitch-texture tribuna-noise py-20 lg:py-28" stagger="3">
       <div class="mx-auto max-w-4xl px-6">
         <div class="mb-12 max-w-lg">
           <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl headline-accent inline-block">
@@ -97,7 +103,7 @@ import SignupSkeleton from '../components/landing/SignupSkeleton.astro';
           </p>
         </div>
 
-        <div class="signup-form-area border border-border/60 bg-background px-6 py-10 sm:px-10 relative min-h-[340px]">
+          <div class="signup-form-area border border-border/60 bg-background px-6 py-10 sm:px-10 relative min-h-[340px]">
           <!-- Skeleton visible until React hydrates the <form>. Hidden via CSS :has() -->
           <SignupSkeleton />
 
@@ -110,7 +116,7 @@ import SignupSkeleton from '../components/landing/SignupSkeleton.astro';
     </RevealSection>
 
     <!-- FAQ Section -->
-    <RevealSection class="border-t border-border py-20 lg:py-28" stagger="3">
+    <RevealSection class="border-t border-border py-20 lg:py-28" stagger="4">
       <div class="mx-auto max-w-3xl px-6">
         <div class="mb-12 max-w-lg">
           <h2 class="text-3xl font-extrabold tracking-tight lg:text-4xl headline-accent inline-block">
@@ -209,11 +215,11 @@ import SignupSkeleton from '../components/landing/SignupSkeleton.astro';
     </RevealSection>
 
     <!-- Footer -->
-    <footer class="border-t border-border bg-cancha-dark py-10">
-      <div class="mx-auto max-w-4xl px-6 text-center text-sm text-white/60">
+    <footer class="border-t border-border bg-secondary py-10">
+      <div class="mx-auto max-w-4xl px-6 text-center text-sm text-secondary-foreground/70">
         <p>Prode Mundial &copy; {new Date().getFullYear()}. Todos los derechos reservados.</p>
         <p class="mt-2">
-          Dudas? Escribinos a <a href="mailto:oficialprodelito@gmail.com" class="underline hover:text-white">oficialprodelito@gmail.com</a>
+          Dudas? Escribinos a <a href="mailto:oficialprodelito@gmail.com" class="underline hover:text-foreground">oficialprodelito@gmail.com</a>
         </p>
       </div>
     </footer>
