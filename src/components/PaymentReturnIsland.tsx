@@ -1,16 +1,14 @@
 import { CircleCheck, CircleX, Clock } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 // ---------------------------------------------------------------------------
-// Types & contracts (matches design.md interfaces)
+// Types & contracts (matches design.md interfaces — unchanged)
 // ---------------------------------------------------------------------------
 
 type PaymentReturnVariant = "success" | "pending" | "error";
 
 // ---------------------------------------------------------------------------
-// Per-route configuration (Spanish Argentina copy)
+// Per-route configuration (Spanish Argentina copy — preserved verbatim)
 // ---------------------------------------------------------------------------
 
 interface VariantConfig {
@@ -45,6 +43,31 @@ const variantConfigMap: Record<PaymentReturnVariant, VariantConfig> = {
 };
 
 // ---------------------------------------------------------------------------
+// Per-variant visual tokens (icon + glow color — semantic, not brand)
+// ---------------------------------------------------------------------------
+
+const variantVisual: Record<
+  PaymentReturnVariant,
+  { icon: typeof CircleCheck; glowColor: string; iconColor: string }
+> = {
+  success: {
+    icon: CircleCheck,
+    glowColor: "bg-emerald-500/15",
+    iconColor: "text-emerald-500",
+  },
+  pending: {
+    icon: Clock,
+    glowColor: "bg-amber-500/15",
+    iconColor: "text-amber-500",
+  },
+  error: {
+    icon: CircleX,
+    glowColor: "bg-destructive/15",
+    iconColor: "text-destructive",
+  },
+};
+
+// ---------------------------------------------------------------------------
 // Props
 // ---------------------------------------------------------------------------
 
@@ -58,83 +81,73 @@ interface PaymentReturnIslandProps {
 
 export function PaymentReturnIsland({ variant }: PaymentReturnIslandProps) {
   const config = variantConfigMap[variant];
-
-  /** Renders the CTA button based on variant and href */
-  const renderCTA = (label: string, href: string, variantClass?: string) => {
-    if (href) {
-      return (
-        <a href={href}>
-          <Button className={cn("font-bold tracking-wide", variantClass)}>
-            {label}
-          </Button>
-        </a>
-      );
-    }
-    // Pending route: no href → button reloads the page
-    return (
-      <Button
-        className="font-bold tracking-wide"
-        variant="outline"
-        onClick={() => window.location.reload()}
-      >
-        {label}
-      </Button>
-    );
-  };
-
-  /** Renders the appropriate icon for the variant */
-  const StatusIcon = ({
-    iconKind,
-    className,
-  }: {
-    iconKind: "success" | "error" | "pending";
-    className?: string;
-  }) => {
-    const iconMap = {
-      success: CircleCheck,
-      error: CircleX,
-      pending: Clock,
-    };
-    const Icon = iconMap[iconKind];
-    const colorMap = {
-      success: "text-emerald-500",
-      error: "text-destructive",
-      pending: "text-amber-500",
-    };
-    return <Icon className={cn("h-12 w-12", colorMap[iconKind], className)} />;
-  };
-
-  const iconKind =
-    variant === "success"
-      ? ("success" as const)
-      : variant === "error"
-        ? ("error" as const)
-        : ("pending" as const);
+  const { icon: Icon, glowColor, iconColor } = variantVisual[variant];
 
   return (
-    <Card className="mx-auto max-w-md text-center">
-      <CardHeader className="items-center gap-4 pb-2">
-        <StatusIcon iconKind={iconKind} />
-        <CardTitle className="text-xl">{config.title}</CardTitle>
-        <CardDescription className="text-base leading-relaxed">
+    <div className="animate-hero-reveal hero-stagger-start mx-auto w-full max-w-lg">
+      {/* ── Top accent bar — celeste brand marker, mirrors landing's top-stripe-celeste ── */}
+      <div
+        className="h-[3px] w-full rounded-t-sm bg-cancha-celeste"
+        aria-hidden="true"
+      />
+
+      {/* ── Card body — matches landing card treatment (border-border bg-card) ── */}
+      <div className="rounded-b-sm border border-border/60 bg-card px-8 py-12 shadow-sm sm:px-14">
+        {/* Icon with radial glow — same pattern as the soccer ball glow in hero */}
+        <div className="relative mx-auto mb-10 flex h-20 w-20 items-center justify-center">
+          <div
+            className={cn("absolute inset-0 rounded-full blur-2xl", glowColor)}
+            aria-hidden="true"
+          />
+          <Icon
+            className={cn("relative h-16 w-16", iconColor)}
+            aria-hidden="true"
+          />
+        </div>
+
+        {/* Title — headline-accent matches landing section titles */}
+        <h1 className="headline-accent mx-auto mb-5 max-w-[20ch] text-center text-2xl font-extrabold tracking-tight sm:text-3xl">
+          {config.title}
+        </h1>
+
+        {/* Description — matching landing body copy */}
+        <p className="mx-auto max-w-prose text-center text-base leading-relaxed text-muted-foreground">
           {config.description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col items-center gap-3">
-        {renderCTA(config.ctaLabel, config.ctaHref)}
-        {/* Support contact for error and pending states */}
-        {(variant === "error" || variant === "pending") && (
-          <p className="text-xs text-muted-foreground">
-            ¿Necesitás ayuda?{" "}
-            <a
-              href="mailto:oficialprodelito@gmail.com"
-              className="underline hover:text-foreground"
+        </p>
+
+        {/* CTA — landing-style button (rounded-sm, font-bold tracking-wide, h-12, hover lift) */}
+        <div className="mt-10 flex flex-col items-center gap-4">
+          {variant === "pending" ? (
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              className="inline-flex h-12 items-center justify-center rounded-sm border border-border bg-background px-8 text-sm font-bold tracking-wide text-foreground shadow-sm transition-[transform,box-shadow,background-color] duration-200 ease-out hover:bg-cancha-stripe hover:-translate-y-[1px] hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
-              oficialprodelito@gmail.com
+              {config.ctaLabel}
+            </button>
+          ) : (
+            <a
+              href={config.ctaHref}
+              className="inline-flex h-12 items-center justify-center rounded-sm bg-primary px-8 text-sm font-bold tracking-wide text-primary-foreground shadow-sm transition-[transform,box-shadow,background-color] duration-200 ease-out hover:bg-primary/90 hover:-translate-y-[1px] hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
+              {config.ctaLabel}
             </a>
-          </p>
-        )}
-      </CardContent>
-    </Card>
+          )}
+
+          {/* Support contact — error and pending routes only */}
+          {(variant === "error" || variant === "pending") && (
+            <p className="text-xs text-muted-foreground">
+              ¿Necesitás ayuda?{" "}
+              <a
+                href="mailto:oficialprodelito@gmail.com"
+                className="underline hover:text-foreground"
+              >
+                oficialprodelito@gmail.com
+              </a>
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

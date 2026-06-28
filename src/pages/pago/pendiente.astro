@@ -7,8 +7,14 @@ import { PaymentReturnIsland } from "../../components/PaymentReturnIsland";
   title="Pago en Proceso | Prode Mundial 2026"
   description="Tu pago está siendo procesado. Revisá el estado más tarde o contactanos si necesitás ayuda."
 >
-  <main class="flex min-h-[80dvh] items-center justify-center px-4 py-16">
-    <div class="w-full max-w-md">
+  <main class="relative flex min-h-[90dvh] items-center justify-center overflow-hidden px-4 py-20">
+    <!-- Decorative background textures — same as landing sections -->
+    <div class="absolute inset-0 pitch-texture pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute inset-0 tribuna-noise pointer-events-none opacity-60" aria-hidden="true"></div>
+    <!-- Celeste accent line at top — stadium feel -->
+    <div class="absolute top-0 left-0 right-0 h-[3px] bg-cancha-celeste" aria-hidden="true"></div>
+
+    <div class="relative w-full">
       <PaymentReturnIsland variant="pending" client:load />
     </div>
   </main>
