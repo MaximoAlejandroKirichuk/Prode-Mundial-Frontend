@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { PaymentReturnIsland } from "../../components/PaymentReturnIsland";
+---
+
+<Layout
+  title="Pago en Proceso | Prode Mundial 2026"
+  description="Tu pago está siendo procesado. Revisá el estado más tarde o contactanos si necesitás ayuda."
+>
+  <main class="flex min-h-[80dvh] items-center justify-center px-4 py-16">
+    <div class="w-full max-w-md">
+      <PaymentReturnIsland variant="pending" client:load />
+    </div>
+  </main>
+</Layout>
