@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import signupReducer from "./signup-slice";
+import tournamentReducer from "./tournament-slice";
 
 export const store = configureStore({
   reducer: {
     signup: signupReducer,
+    tournament: tournamentReducer,
   },
 });
 
