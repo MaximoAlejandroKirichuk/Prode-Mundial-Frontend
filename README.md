@@ -1,46 +1,39 @@
-# Astro Starter Kit: Basics
+# Prode Mundial
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+Fan prediction pool for the FIFA World Cup 2026. Make your match predictions, compete with other fans across Argentina and Latin America, and prove you know your football.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Tech Stack
 
-## 🚀 Project Structure
+| Layer | Technology |
+|-------|------------|
+| Shell / SSR | Astro 7 |
+| Interactivity | React 19 (hydrated islands only) |
+| State | Redux Toolkit |
+| Styling | Tailwind CSS 4 + shadcn/ui |
+| Language | TypeScript |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Commands
+
+| Command | Action |
+|---------|--------|
+| `pnpm dev` | Start local dev server |
+| `pnpm build` | Build production site to `./dist/` |
+| `pnpm preview` | Preview build locally |
+| `pnpm astro` | Run Astro CLI commands (`astro check`, `astro add`, etc.) |
+
+## Project Structure
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+├── public/              # Static assets (favicon, icons)
+├── src/
+│   ├── components/      # React components + shadcn/ui primitives
+│   ├── layouts/         # Astro layouts (SEO, meta tags)
+│   ├── pages/           # Astro routes (shell pages)
+│   ├── store/           # Redux Toolkit store + slices
+│   ├── styles/          # Tailwind CSS (global.css)
+│   └── lib/             # Shared utilities (cn helper)
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Astro serves as the shell: routes and SEO live in `.astro` entrypoints. React islands hydrate only where interactivity is needed (`client:load`).
